@@ -23,7 +23,7 @@ public class Game{
 	
 	public Game(int size) {
 		if(size >= MinGrid && size <= MaxGrid) {
-			this.grid = randomGrid(size);
+			this.grid = createRandomGrid(size);
 		} else {
 			this.grid = null;
 		}
@@ -36,7 +36,7 @@ public class Game{
 	 public void setGrid(Grid grid) {
 	        this.grid = grid;
 	    }
-	 public Grid randomGrid(int size) {
+	 public Grid createRandomGrid(int size) {
 		 if (size < MinGrid || size > MaxGrid) {
 			 return null;
 		 }
@@ -45,7 +45,7 @@ public class Game{
 		 ArrayList<Row> rows = new ArrayList<>();
 		 
 		 for(int i = 0; i < size; i++) {
-			 ArrayList<Cell> cells = new Arraylist<>();
+			 ArrayList<Cell> cells = new ArrayList<>();
 			 for(int j = 0; j < size; j++) {
 				 CellComponents left = null;
 				 CellComponents right = null;
@@ -54,7 +54,9 @@ public class Game{
 				 
 				 if(j == 0) {
 					 left = CellComponents.WALL;
-				 }
+				 } else {
+					 left = cells.get(j - 1).getRight();
+				}
 				 if(j == size - 1) {
 					 right = CellComponents.WALL;
 				 }
@@ -66,21 +68,21 @@ public class Game{
 				 }
 				 
 				 if(i >0) {
-					 up = rows.get(i -1).getCells().get(j).getDown()
+					 up = rows.get(i -1).getCells().get(j).getDown();
 				 }
 				 
 				 if(right == null) {
 					 if(rand.nextBoolean()) {
 						 right = CellComponents.WALL;
 					 } else {
-						 right = CellComponents.APERATURE;
+						 right = CellComponents.APERTURE;
 					 }
 				 }
 				 if(down == null) {
 					 if(rand.nextBoolean()) {
 						 down = CellComponents.WALL;
 					 } else {
-						 down = CellComponents.APERATURE;
+						 down = CellComponents.APERTURE;
 					 }
 				 }
 				 
@@ -88,23 +90,29 @@ public class Game{
 				 cells.add(cell);
 			
 			 }
-			 Row row = new row(cells);
+			 Row row = new Row(cells);
 			 rows.add(row);
 		 }
 		 
 		 int exitRow = rand.nextInt(size);
-		 Cell exitCell= rows.get(exitrow).getCells().get(0);
-		 exitCell.setleft(CellComponents.EXIT);
+		 Cell exitCell= rows.get(exitRow).getCells().get(0);
+		 exitCell.setLeft(CellComponents.EXIT);
 		 
 		 return new Grid(rows);
 	 }
 	 
 	 public boolean play(Movement move, Player player) {
-		 if(move == null || player == null) {
-			 return false;
-		 }
-		 return player.move(move);
-	 }
+		    if (move == null || player == null) {
+		        return false;
+		    }
+
+		    player.setGrid(grid); // inject the grid every time
+
+		    boolean result = player.move(move);
+		    //System.out.println("Attempted move: " + move + " → " + result);
+		    return result;
+		}
+
 	 
 	 @Override
 	 public String toString() {

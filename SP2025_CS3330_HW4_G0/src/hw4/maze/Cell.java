@@ -7,10 +7,29 @@ public class Cell{
 	private CellComponents down;
 	
 	public Cell(CellComponents left,CellComponents right,CellComponents up,CellComponents down) {
-		this.left = left;
-		this.right = right;
-		this.up = up;
-		this.down = down;
+		if(left == null) {
+			this.left = CellComponents.WALL;
+		} else {
+			this.left = left;
+		}
+		
+		if(right == null) {
+			this.right = CellComponents.WALL;
+		} else {
+			this.right = right;
+		}
+		
+		if(up == null) {
+			this.up = CellComponents.WALL;
+		} else {
+			this.up = up;
+		}
+		
+		if(down == null) {
+			this.down = CellComponents.WALL;
+		} else {
+			this.down = down;
+		}
 	}
 
 	public CellComponents getLeft() {
@@ -18,7 +37,13 @@ public class Cell{
 	}
 
 	public void setLeft(CellComponents left) {
-		this.left = left;
+		//System.out.println("setLeft called with: " + left);
+		if(left == null) {
+			this.left = CellComponents.WALL;
+		} else {
+			this.left = left;
+		}
+		
 	}
 
 	public CellComponents getRight() {
@@ -26,7 +51,11 @@ public class Cell{
 	}
 
 	public void setRight(CellComponents right) {
-		this.right = right;
+		if(right == null) {
+			this.right = CellComponents.WALL;
+		} else {
+			this.right = right;
+		}
 	}
 
 	public CellComponents getUp() {
@@ -34,7 +63,11 @@ public class Cell{
 	}
 
 	public void setUp(CellComponents up) {
-		this.up = up;
+		if(up == null) {
+			this.up = CellComponents.WALL;
+		} else {
+			this.up = up;
+		}
 	}
 
 	public CellComponents getDown() {
@@ -42,12 +75,47 @@ public class Cell{
 	}
 
 	public void setDown(CellComponents down) {
-		this.down = down;
+		if(down == null) {
+			this.down = CellComponents.WALL;
+		} else {
+			this.down = down;
+		}
 	}
 	
 	@Override
 	public String toString() {
-		return "Cell [left=" + left + ", right=" + right + ", up=" + up + ", down=" + down + "]";
+		String leftStr;
+		String rightStr;
+		String upStr;
+		String downStr;
+		
+		if(left == null) {
+			leftStr = "WALL";
+		} else {
+			leftStr = left.toString();
+		}
+		
+		if(right == null) {
+			rightStr = "WALL";
+		} else {
+			rightStr = right.toString();
+		}
+		
+		if(up == null) {
+			upStr = "WALL";
+		} else {
+			upStr = up.toString();
+		}
+		
+		if(down == null) {
+			downStr = "WALL";
+		} else {
+			downStr = down.toString();
+		}
+		
+		
+		
+		return "Cell [left=" + leftStr + ", right=" + rightStr + ", up=" + upStr + ", down=" + downStr + "]";
 	}
 }
 	
