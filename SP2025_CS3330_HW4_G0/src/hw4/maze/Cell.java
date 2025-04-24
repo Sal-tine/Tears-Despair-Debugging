@@ -1,10 +1,25 @@
 package hw4.maze;
 
+
+/**
+ * single cell in a maze with four directions
+ * each direction may be a wall, aperture or exit. 
+ */
 public class Cell{
 	private CellComponents left;
 	private CellComponents right;
 	private CellComponents up;
 	private CellComponents down;
+	
+	/**
+	 * makes a new cell with given direction compomenents
+	 * if the component is null default to wall
+	 * 
+	 * @param left left side of cell
+	 * @param right right side of cell
+	 * @param up up side of cell
+	 * @param down down side of cell
+	 */
 	
 	public Cell(CellComponents left,CellComponents right,CellComponents up,CellComponents down) {
 		if(left == null) {
@@ -32,10 +47,21 @@ public class Cell{
 		}
 	}
 
+	/**
+	 * returns the left component of cell
+	 * 
+	 * @return the left cell component value
+	 */
 	public CellComponents getLeft() {
 		return left;
 	}
 
+	/**
+	 * sets left component of the cell
+	 * default to wall if null
+	 * 
+	 * @param left the new left cell component value
+	 */
 	public void setLeft(CellComponents left) {
 		//System.out.println("setLeft called with: " + left);
 		if(left == null) {
@@ -45,11 +71,21 @@ public class Cell{
 		}
 		
 	}
-
+	
+	/**
+	 * gets right component of the cell
+	 * @return the right cell component value
+	 */
 	public CellComponents getRight() {
 		return right;
 	}
-
+	
+	/**
+	 * sets right component of the cell
+	 * default to wall if null
+	 * 
+	 * @param right the new left cell component value
+	 */
 	public void setRight(CellComponents right) {
 		if(right == null) {
 			this.right = CellComponents.WALL;
@@ -57,11 +93,21 @@ public class Cell{
 			this.right = right;
 		}
 	}
-
+	
+	/**
+	 * gets up component of the cell
+	 * @return the down cell component value
+	 */
 	public CellComponents getUp() {
 		return up;
 	}
 
+	/**
+	 * sets up component of the cell
+	 * default to wall if null
+	 * 
+	 * @param up the new left cell component value
+	 */
 	public void setUp(CellComponents up) {
 		if(up == null) {
 			this.up = CellComponents.WALL;
@@ -69,11 +115,21 @@ public class Cell{
 			this.up = up;
 		}
 	}
-
+	
+	/**
+	 * gets down component of the cell
+	 * @return the down cell component value
+	 */
 	public CellComponents getDown() {
 		return down;
 	}
 
+	/**
+	 * sets down component of the cell
+	 * default to wall if null
+	 * 
+	 * @param down the new left cell component value
+	 */
 	public void setDown(CellComponents down) {
 		if(down == null) {
 			this.down = CellComponents.WALL;
@@ -81,6 +137,11 @@ public class Cell{
 			this.down = down;
 		}
 	}
+	
+	 /**
+	  *Returns a string of the cell
+	  * @return a string describing the game
+	  */
 	
 	@Override
 	public String toString() {
